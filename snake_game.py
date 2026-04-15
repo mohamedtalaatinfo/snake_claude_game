@@ -35,10 +35,10 @@ CONFIG = {
 
     # Snake speed: seconds between each move (lower = faster)
     # Suggested range: 0.05 (blazing) → 0.3 (relaxed)
-    "speed": 0.12,
+    "speed": 0.05,
 
     # How many fruits are on the board at the same time
-    "fruit_count": 3,
+    "fruit_count": 20,
 }
 # ──────────────────────────────────────────
 

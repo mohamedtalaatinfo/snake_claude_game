@@ -1,72 +1,95 @@
-🐍 Snake Claude Game
+# 🐍 CLI Snake Game
 
-A modern, customizable implementation of the classic Snake game, built with simplicity and extensibility in mind. This version features smooth gameplay, score tracking, and a modular code structure that allows for easy customization of controls and game mechanics.
-🚀 Features
+A classic Snake game that runs in your terminal — built in Python, zero dependencies.
 
-    Classic Gameplay: Eat the food to grow longer while avoiding the walls and your own tail.
+The default controls are `h j k l`, the same keys used to navigate in Vim. If you're trying to build that muscle memory, every game session is secretly a practice round.
 
-    Score System: Real-time score tracking to challenge your high scores.
+---
 
-    Responsive Controls: Default support for keyboard navigation.
+## Requirements
 
-    Highly Customizable: Easily modify game settings like speed, colors, and controls.
+- Python 3.x
+- A terminal at least 30×15 in size
 
-🕹️ How to Play
+No external packages needed. The game uses Python's built-in `curses` library.
 
-    Open index.html in any modern web browser.
+---
 
-    Use the Arrow Keys (default) to move the snake.
+## How to run
 
-    Collect the food to increase your score and length.
+```bash
+python3 snake.py
+```
 
-    The game ends if you hit a wall or yourself.
+---
 
-⚙️ Customization
+## Controls
 
-This project is designed to be easily tweaked. You can modify the following settings directly in the source code (usually within script.js or the main configuration block):
-1. Modifying Navigation Keys
+| Key | Action |
+|-----|--------|
+| `h` | Move left |
+| `j` | Move down |
+| `k` | Move up |
+| `l` | Move right |
+| `q` | Quit |
 
-If you prefer WASD or other keys, you can change the key mappings in the event listener section.
+---
 
-    Locate: Look for the keydown event listener.
+## Modifying game settings
 
-    Change: Update the key codes (e.g., change ArrowUp to KeyW).
+All settings live in the `CONFIG` block at the top of `snake.py`. Open the file and tweak anything there — no need to touch the rest of the code.
 
-2. Game Physics & Difficulty
+```python
+CONFIG = {
+    "key_up":    ord('k'),
+    "key_down":  ord('j'),
+    "key_left":  ord('h'),
+    "key_right": ord('l'),
+    "speed": 0.12,
+    "fruit_count": 3,
+}
+```
 
-You can adjust the core difficulty of the game by changing variables such as:
+### Navigation keys
 
-    Game Speed: Adjust the interval timer (e.g., 100ms for normal, 50ms for hard).
+The default is `h j k l` (Vim-style). Two alternatives are already written in the file as commented-out lines — just swap which block is active.
 
-    Grid Size: Change the canvas dimensions or tile size to make the playing field larger or smaller.
+**Switch to arrow keys:**
+```python
+"key_up":    curses.KEY_UP,
+"key_down":  curses.KEY_DOWN,
+"key_left":  curses.KEY_LEFT,
+"key_right": curses.KEY_RIGHT,
+```
 
-3. Visuals
+**Switch to WASD:**
+```python
+"key_up":    ord('w'),
+"key_down":  ord('s'),
+"key_left":  ord('a'),
+"key_right": ord('d'),
+```
 
-Want a different look? You can modify:
+### Speed
 
-    Snake Color: Change the fill style for the snake segments.
+The `speed` value is the delay in seconds between each move. Lower means faster.
 
-    Food Color: Change the color of the spawned food.
+| Value | Feel |
+|-------|------|
+| `0.05` | Blazing fast |
+| `0.12` | Default |
+| `0.20` | Relaxed |
+| `0.30` | Very slow |
 
-    Background: Update the CSS or Canvas background color.
+> The snake also speeds up slightly as you eat more fruits, regardless of the starting speed.
 
-🛠️ Installation
+### Fruit count
 
-No installation is required. This is a client-side web application.
+`fruit_count` controls how many fruits appear on the board at the same time. Default is `3`. Increase it for a more chaotic board, lower it for a cleaner game.
 
-    Clone the repository:
-    Bash
+---
 
-    git clone https://github.com/mohamedtalaatinfo/snake_claude_game.git
+## Scoring
 
-    Navigate to the project folder.
-
-    Open index.html in your browser.
-
-🧪 Technologies Used
-
-    HTML5: For the game structure and Canvas element.
-
-    CSS3: For styling and layout.
-
-    JavaScript (ES6+): For game logic, rendering, and input handling.
+- **+10 points** per fruit eaten
+- Score and snake length are shown at the top of the screen during the game
